@@ -35,27 +35,25 @@ def GetPointInCircle(r):
     return Point
 
 for ep in range(num_of_steps):
-   SolutionNew = Solution + GetPointInCircle(T) # new solution (should be near previous one !)
-
-   E = mm.fun3(SolutionNew[0],SolutionNew[1])       # function value for point coordinates
-
-   dE = E - E_prev                                  # change of function value (dE < 0 means than new solution is better)
-
-   p_accept = 1 + (1 / (math.exp(dE / (c * T))))                                  # acceptance probability
-   if np.random.rand() < p_accept:
-      Solution = SolutionNew
-      E_prev = E
-
-   if E_min > E:
-      print("new minimum = " + str(E) + " for point x1 = " + str(SolutionNew[0]) + " x2 = " + str(SolutionNew[1]) + "\n")
-      E_min = E
-      Solution_min = SolutionNew
-      Records = np.append(Records, [SolutionNew], axis = 0)
-
-   T = ???                                          # temperature changing (can be only after accaptance or in another place)
-   if T < T_min:
-      T = T_min
+    print("Step: " + str(ep))
+    SolutionNew = Solution + GetPointInCircle(T) # new solution (should be near previous one !)
+    E = mm.fun3(SolutionNew[0],SolutionNew[1])       # function value for point coordinates
+    dE = E - E_prev                                  # change of function value (dE < 0 means than new solution is better)
+    p_accept = 1 + (1 / (math.exp(dE / (c * T))))                                  # acceptance probability
+    if np.random.rand() < p_accept:
+        Solution = SolutionNew
+        E_prev = E
+    if E_min > E:
+        print("new minimum = " + str(E) + " for point x1 = " + str(SolutionNew[0]) + " x2 = " + str(SolutionNew[1]) + "\n")
+        E_min = E
+        Solution_min = SolutionNew
+        Records = np.append(Records, [SolutionNew], axis = 0)
+    T = (np.random.rand()*10)* wT # temperature changing (can be only after accaptance or in another place)
+    wT -= 0.01
+    if T < T_min:
+        T = T_min
 # end of steps loop
+
 text = "best solution, value = " + str(E_min) + " for point x1 = " + str(Solution_min[0]) + " x2 = " + str(Solution_min[1])
 print(text + "\n")
 mm.show_point_sequence(Records,"record sequence, " + text)
