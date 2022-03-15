@@ -62,5 +62,5 @@ for ix in range(10):
    text = "best solution, value = " + str(E_min) + " for point x1 = " + str(Solution_min[0]) + " x2 = " + str(Solution_min[1])
    Average +=E_min
    print(text)
-   #mm.show_point_sequence(Records,"record sequence, " + text)
+   mm.show_point_sequence(Records,"record sequence, " + text)
 print("Average answer: " + str(Average/10))
