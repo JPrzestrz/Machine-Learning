@@ -30,3 +30,18 @@ scaler = StandardScaler()
 # Scale train_features and test_features
 scaled_train_features = scaler.fit_transform(train_features)
 scaled_test_features = scaler.transform(test_features)
+
+# This is just to make plots appear in the notebook
+#%matplotlib inline
+# Import our plotting module, and PCA class
+#... YOUR CODE ...
+import matplotlib.pyplot as plt 
+from sklearn.decomposition import PCA
+# Get our explained variance ratios from PCA using all features
+pca = PCA()
+pca.fit(scaled_train_features)
+exp_variance = pca.explained_variance_ratio_
+# plot the explained variance using a barplot
+fig, ax = plt.subplots()
+ax.bar(range(pca.n_components_), exp_variance)
+ax.set_xlabel('Principal Component #')
