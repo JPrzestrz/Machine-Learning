@@ -54,3 +54,10 @@ cum_exp_variance = np.cumsum(exp_variance)
 fig, ax = plt.subplots()
 ax.plot(cum_exp_variance)
 ax.axhline(y=0.85, linestyle='--')
+
+# Perform PCA with the chosen number of components and project data onto components
+pca = PCA(n_components=6, random_state=10)
+# Fit and transform the scaled training features using pca
+train_pca = pca.fit_transform(scaled_train_features)
+# Fit and transform the scaled test features using pca
+test_pca = pca.transform(scaled_test_features)
