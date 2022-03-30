@@ -1,5 +1,4 @@
 import pandas as pd
-
 # Read in track metadata with genre labels
 tracks = pd.read_csv('datasets/fma-rock-vs-hiphop.csv')
 # Read in track metrics with the features
