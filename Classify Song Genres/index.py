@@ -61,3 +61,12 @@ pca = PCA(n_components=6, random_state=10)
 train_pca = pca.fit_transform(scaled_train_features)
 # Fit and transform the scaled test features using pca
 test_pca = pca.transform(scaled_test_features)
+
+# Import Decision tree classifier
+# ... YOUR CODE ...
+from sklearn.tree import DecisionTreeClassifier
+# Train our decision tree
+tree = DecisionTreeClassifier(random_state=10)
+tree.fit(train_pca,train_labels)
+# Predict the labels for the test data
+pred_labels_tree = tree.predict(test_pca)
