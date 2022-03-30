@@ -99,3 +99,29 @@ train_features, test_features, train_labels, test_labels = train_test_split(
     features, labels, random_state=10)
 train_pca = pca.fit_transform(scaler.fit_transform(train_features))
 test_pca = pca.transform(scaler.transform(test_features))
+
+# Train our decision tree on the balanced data
+tree = DecisionTreeClassifier(random_state=10)
+tree.fit(train_pca,train_labels)
+pred_labels_tree = tree.predict(test_pca)
+# Train our logistic regression on the balanced data
+logreg = LogisticRegression(random_state=10)
+logreg.fit(train_pca,train_labels)
+pred_labels_logit = logreg.predict(test_pca)
+# Compare the models
+print("Decision Tree: \n", classification_report(test_labels,pred_labels_tree))
+print("Logistic Regression: \n", classification_report(test_labels,pred_labels_logit))
+
+from sklearn.model_selection import KFold, cross_val_score
+from sklearn.pipeline import Pipeline
+tree_pipe = Pipeline([("scaler", StandardScaler()), ("pca", PCA(n_components=6)), 
+                      ("tree", DecisionTreeClassifier(random_state=10))])
+logreg_pipe = Pipeline([("scaler", StandardScaler()), ("pca", PCA(n_components=6)), 
+                        ("logreg", LogisticRegression(random_state=10))])
+# Set up our K-fold cross-validation
+kf = KFold(n_splits=10)
+# Train our models using KFold cv
+tree_score = cross_val_score(tree_pipe,features,labels,cv=kf)
+logit_score = cross_val_score(logreg_pipe,features,labels,cv=kf)
+# Print the mean of each array of scores
+print("Decision Tree:", tree_score.mean(), "Logistic Regression:", logit_score.mean())
