@@ -45,3 +45,12 @@ exp_variance = pca.explained_variance_ratio_
 fig, ax = plt.subplots()
 ax.bar(range(pca.n_components_), exp_variance)
 ax.set_xlabel('Principal Component #')
+
+# Import numpy
+import numpy as np
+# Calculate the cumulative explained variance
+cum_exp_variance = np.cumsum(exp_variance)
+# Plot the cumulative explained variance and draw a dashed line at 0.85.
+fig, ax = plt.subplots()
+ax.plot(cum_exp_variance)
+ax.axhline(y=0.85, linestyle='--')
