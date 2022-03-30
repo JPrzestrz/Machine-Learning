@@ -22,3 +22,11 @@ features = echo_tracks.drop(["genre_top", "track_id"], axis=1).values
 labels = echo_tracks["genre_top"].values
 # Split our data
 train_features, test_features, train_labels, test_labels = train_test_split(features,labels,random_state=10)
+
+# Import the StandardScaler
+from sklearn.preprocessing import StandardScaler
+# Scale the features and set the values to a new variable
+scaler = StandardScaler()
+# Scale train_features and test_features
+scaled_train_features = scaler.fit_transform(train_features)
+scaled_test_features = scaler.transform(test_features)
