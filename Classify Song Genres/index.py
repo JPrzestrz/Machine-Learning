@@ -83,3 +83,19 @@ class_rep_tree = classification_report(test_labels, pred_labels_tree)
 class_rep_log = classification_report(test_labels, pred_labels_logit)
 print("Decision Tree: \n", class_rep_tree)
 print("Logistic Regression: \n", class_rep_log)
+
+# Subset only the hip-hop tracks, and then only the rock tracks
+hop_only = echo_tracks.loc[echo_tracks['genre_top'] == 'Hip-Hop']
+rock_only = echo_tracks.loc[echo_tracks['genre_top'] == 'Rock']
+# sample the rocks songs to be the same number as there are hip-hop songs
+rock_only = rock_only.sample(hop_only.shape[0], random_state=10)
+# concatenate the dataframes rock_only and hop_only
+rock_hop_bal = pd.concat([rock_only, hop_only])
+# The features, labels, and pca projection are created for the balanced dataframe
+features = rock_hop_bal.drop(['genre_top', 'track_id'], axis=1) 
+labels = rock_hop_bal['genre_top']
+# Redefine the train and test set with the pca_projection from the balanced data
+train_features, test_features, train_labels, test_labels = train_test_split(
+    features, labels, random_state=10)
+train_pca = pca.fit_transform(scaler.fit_transform(train_features))
+test_pca = pca.transform(scaler.transform(test_features))
