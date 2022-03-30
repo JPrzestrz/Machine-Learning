@@ -70,3 +70,16 @@ tree = DecisionTreeClassifier(random_state=10)
 tree.fit(train_pca,train_labels)
 # Predict the labels for the test data
 pred_labels_tree = tree.predict(test_pca)
+
+# Import LogisticRegression
+from sklearn.linear_model import LogisticRegression
+# Train our logistic regression and predict labels for the test set
+logreg = LogisticRegression(random_state=10)
+logreg.fit(train_pca,train_labels)
+pred_labels_logit = logreg.predict(test_pca)
+# Create the classification report for both models
+from sklearn.metrics import classification_report
+class_rep_tree = classification_report(test_labels, pred_labels_tree)
+class_rep_log = classification_report(test_labels, pred_labels_logit)
+print("Decision Tree: \n", class_rep_tree)
+print("Logistic Regression: \n", class_rep_log)
