@@ -1,4 +1,6 @@
+from unittest import TestCase
 import pandas as pd 
+import numpy as np
 telco_raw = pd.read_csv('telco.csv')
 
 # Data inspection 
