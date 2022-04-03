@@ -1,7 +1,9 @@
 from unittest import TestCase
 import pandas as pd 
 import numpy as np
+from sympy import numer
 telco_raw = pd.read_csv('telco.csv')
+telco = pd.read_csv('telco.csv')
 
 # Data inspection 
 # Print the data types of telco_raw dataset
@@ -30,3 +32,6 @@ scaler = StandardScaler()
 scaled_numerical = scaler.fit_transform(telco_raw[numerical])
 # Build a DataFrame from scaled_numerical
 scaled_numerical = pd.DataFrame(scaled_numerical, columns=numerical)
+
+# Spliting dataset into dependent and independent features
+telco_raw.to_csv('new.csv')
