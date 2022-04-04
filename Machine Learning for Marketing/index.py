@@ -57,4 +57,16 @@ treemodel = mytree.fit(train_X, train_Y)
 pred_Y = treemodel.predict(test_X)
 # Measure model performance on testing data
 accuracy_score(test_Y, pred_Y)
-print(accuracy_score)
+
+# Initialize the Decision Tree
+clf = tree.DecisionTreeClassifier(max_depth = 7, 
+               criterion = 'gini', 
+               splitter  = 'best')
+
+# Fit the model to the training data
+clf = clf.fit(train_X, train_Y)
+# Predict the values on test dataset
+pred_Y = clf.predict(test_X)
+# Print accuracy values
+print("Training accuracy: ", np.round(clf.score(train_X, train_Y), 3)) 
+print("Test accuracy: ", np.round(accuracy_score(test_Y, pred_Y), 3))
