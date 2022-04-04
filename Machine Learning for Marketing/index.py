@@ -45,9 +45,9 @@ X.drop(['Churn','customerID'], axis='columns', inplace=True)
 # Split X and Y into training and testing datasets
 train_X, test_X, train_Y, test_Y = train_test_split(X, Y, test_size=0.25)
 # Ensure training dataset has only 75% of original X data
-print(train_X.shape[0] / X.shape[0])
+#print(train_X.shape[0] / X.shape[0])
 # Ensure testing dataset has only 25% of original X data
-print(test_X.shape[0] / X.shape[0])
+#print(test_X.shape[0] / X.shape[0])
 
 # Initialize the model with max_depth set at 5
 mytree = tree.DecisionTreeClassifier(max_depth = 5)
