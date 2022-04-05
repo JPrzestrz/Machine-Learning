@@ -55,18 +55,6 @@ test_Y = test[target]
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import recall_score, precision_score, accuracy_score
 logreg = LogisticRegression()
-
-# Initialize logistic regression instance 
-logreg = LogisticRegression(penalty='l1', C=0.025, solver='liblinear')
-# Fit the model on training data
-logreg.fit(train_X, train_Y)
-# Predict churn values on test data
-pred_test_Y = logreg.predict(test_X)
-# Print the accuracy score on test data
-print('Coeff:', np.count_nonzero(logreg.coef_))
-print('Test accuracy:', round(accuracy_score(test_Y, pd.DataFrame(pred_test_Y)), 4))
-print('Test recall:', round(recall_score(test_Y, pred_test_Y, pos_label = 'Yes'), 4))
-
 C = [1, .5, .25, .1, .05, .025, .01, .005, .0025]
 l1_metrics = np.zeros((len(C), 5))
 l1_metrics[:,0] = C
