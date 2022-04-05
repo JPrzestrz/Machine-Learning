@@ -50,3 +50,15 @@ train_X = train[cols]
 train_Y = train[target]
 test_X = test[cols]
 test_Y = test[target]
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+logreg = LogisticRegression()
+# Fit logistic regression on training data
+logreg.fit(train_X, train_Y)
+# Predict churn labels on testing data
+pred_test_Y = logreg.predict(test_X)
+# Calculate accuracy score on testing data
+test_accuracy = accuracy_score(test_Y, pred_test_Y)
+# Print test accuracy score rounded to 4 decimals
+print('Test accuracy:', round(test_accuracy, 4))
