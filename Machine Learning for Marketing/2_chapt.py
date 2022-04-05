@@ -62,3 +62,12 @@ pred_test_Y = logreg.predict(test_X)
 test_accuracy = accuracy_score(test_Y, pred_test_Y)
 # Print test accuracy score rounded to 4 decimals
 print('Test accuracy:', round(test_accuracy, 4))
+
+# Initialize logistic regression instance 
+logreg = LogisticRegression(penalty='l1', C=0.025, solver='liblinear')
+# Fit the model on training data
+logreg.fit(train_X, train_Y)
+# Predict churn values on test data
+pred_test_Y = logreg.predict(test_X)
+# Print the accuracy score on test data
+print('Test accuracy w. regularization:', round(accuracy_score(test_Y, pred_test_Y), 4))
