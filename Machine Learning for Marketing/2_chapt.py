@@ -74,4 +74,3 @@ for index in range(0, len(C)):
 # Name the columns and print the array as pandas DataFrame
 col_names = ['C','Non-Zero Coeffs','Accuracy','Precision','Recall']
 print(pd.DataFrame(l1_metrics, columns=col_names))
-
