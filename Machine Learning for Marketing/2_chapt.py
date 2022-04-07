@@ -75,4 +75,4 @@ for index in range(0, len(C)):
 col_names = ['C','Non-Zero Coeffs','Accuracy','Precision','Recall']
 print(pd.DataFrame(l1_metrics, columns=col_names))
 
-# Chapter 2
+# Predict churn with decision trees
