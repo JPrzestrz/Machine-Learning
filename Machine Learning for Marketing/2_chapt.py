@@ -7,6 +7,7 @@ from turtle import pos
 import pandas as pd 
 import numpy as np
 from sklearn.model_selection import train_test_split
+from sklearn import tree
 telcom = pd.read_csv('telco.csv')
 # Store customerID and Churn column names
 custid = ['customerID']
@@ -76,3 +77,13 @@ col_names = ['C','Non-Zero Coeffs','Accuracy','Precision','Recall']
 print(pd.DataFrame(l1_metrics, columns=col_names))
 
 # Predict churn with decision trees
+# Initialize decision tree classifier
+mytree = tree.DecisionTreeClassifier()
+# Fit the decision tree on training data
+mytree.fit(train_X, train_Y)
+# Predict churn labels on testing data
+pred_test_Y = mytree.predict(test_X)
+# Calculate accuracy score on testing data
+test_accuracy = accuracy_score(test_Y, pred_test_Y)
+# Print test accuracy
+print('Test accuracy:', round(test_accuracy, 4))
