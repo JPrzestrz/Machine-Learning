@@ -87,3 +87,5 @@ pred_test_Y = mytree.predict(test_X)
 test_accuracy = accuracy_score(test_Y, pred_test_Y)
 # Print test accuracy
 print('Test accuracy:', round(test_accuracy, 4))
+
+# code day 
