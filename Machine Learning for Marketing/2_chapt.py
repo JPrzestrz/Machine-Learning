@@ -100,7 +100,17 @@ for index in range(0, len(depth_list)):
   pred_test_Y = mytree.predict(test_X)
   # Calculate the recall score 
   depth_tuning[index,1] = recall_score(test_Y, pred_test_Y)
-
 # Name the columns and print the array as pandas DataFrame
 col_names = ['Max_Depth','Recall']
 print(pd.DataFrame(depth_tuning, columns=col_names))
+
+# Combine feature names and coefficients into pandas DataFrame
+feature_names = pd.DataFrame(train_X.columns, columns = ['Feature'])
+log_coef = pd.DataFrame(np.transpose(logreg.coef_), columns = ['Coefficient'])
+coefficients = pd.concat([feature_names, log_coef], axis = 1)
+# Calculate exponent of the logistic regression coefficients
+coefficients['Exp_Coefficient'] = np.exp(coefficients['Coefficient'])
+# Remove coefficients that are equal to zero
+coefficients = coefficients[coefficients['Coefficient']!=0]
+# Print the values sorted by the exponent coefficient
+print(coefficients.sort_values(by=['Exp_Coefficient']))
