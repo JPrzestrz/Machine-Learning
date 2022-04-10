@@ -89,3 +89,18 @@ test_accuracy = accuracy_score(test_Y, pred_test_Y)
 print('Test accuracy:', round(test_accuracy, 4))
 
 # code day 
+depth_list = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+depth_tuning = np.array([[ 2.,  0.],[ 3.,  0.],[ 4.,  0.],[ 5.,  0.],[ 6.,  0.],[ 7.,  0.],[ 8.,  0.],[ 9.,  0.],[10.,  0.],[11.,  0.],[12.,  0.],[13.,  0.],[14.,  0.]])
+# Run a for loop over the range of depth list length
+for index in range(0, len(depth_list)):
+  # Initialize and fit decision tree with the `max_depth` candidate
+  mytree = tree.DecisionTreeClassifier(max_depth=depth_list[index])
+  mytree.fit(train_X, train_Y)
+  # Predict churn on the testing data
+  pred_test_Y = mytree.predict(test_X)
+  # Calculate the recall score 
+  depth_tuning[index,1] = recall_score(test_Y, pred_test_Y)
+
+# Name the columns and print the array as pandas DataFrame
+col_names = ['Max_Depth','Recall']
+print(pd.DataFrame(depth_tuning, columns=col_names))
