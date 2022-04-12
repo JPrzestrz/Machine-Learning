@@ -8,6 +8,8 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import tree
+import graphviz
+from IPython.display import display
 telcom = pd.read_csv('telco.csv')
 # Store customerID and Churn column names
 custid = ['customerID']
@@ -99,7 +101,7 @@ for index in range(0, len(depth_list)):
   # Predict churn on the testing data
   pred_test_Y = mytree.predict(test_X)
   # Calculate the recall score 
-  depth_tuning[index,1] = recall_score(test_Y, pred_test_Y)
+  depth_tuning[index,1] = recall_score(test_Y, pred_test_Y,pos_label='Yes')
 # Name the columns and print the array as pandas DataFrame
 col_names = ['Max_Depth','Recall']
 print(pd.DataFrame(depth_tuning, columns=col_names))
@@ -124,4 +126,4 @@ exported = tree.export_graphviz(decision_tree=mytree,
 # Call the Source function and pass the exported graphviz object
 graph = graphviz.Source(exported)
 # Display the decision tree
-display_image("/usr/local/share/datasets/decision_tree_rules.png")
+display(graph)
