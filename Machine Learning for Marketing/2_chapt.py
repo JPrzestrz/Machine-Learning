@@ -120,7 +120,7 @@ print(coefficients.sort_values(by=['Exp_Coefficient']))
 # Export graphviz object from the trained decision tree 
 exported = tree.export_graphviz(decision_tree=mytree, 
 			# Assign feature names
-      out_file='tree.png', feature_names=train_X.columns, 
+      out_file='tree.dot', feature_names=train_X.columns, 
 			# Set precision to 1 and add class names
 			precision=1, class_names=['Not churn','Churn'], filled = True)
 # Call the Source function and pass the exported graphviz object
