@@ -3,9 +3,11 @@
 Chapter 3 - Customer Lifetime Value (CLV) prediction
 ----------------------------------------------------
 '''
+import pandas as pd
+cohort_counts=pd.read_fwf('retention.txt')
 # Extract cohort sizes from the first column of cohort_counts
 cohort_sizes = cohort_counts.iloc[:,0]
-
+print(cohort_counts.head())
 # Calculate retention by dividing the counts with the cohort sizes
 retention = cohort_counts.divide(cohort_sizes, axis=0)
 
