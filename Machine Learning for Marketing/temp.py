@@ -33,3 +33,14 @@ lifespan_months = 36
 clv_basic = monthly_revenue * lifespan_months
 # Print the basic CLV value
 print('Average basic CLV is {:.1f} USD'.format(clv_basic))
+
+# Calculate average revenue per invoice
+revenue_per_purchase = online.groupby(['InvoiceNo'])['TotalSum'].mean().mean()
+# Calculate average number of unique invoices per customer per month
+frequency_per_month = online.groupby(['CustomerID','InvoiceMonth'])['InvoiceNo'].nunique().mean()
+# Define lifespan to 36 months
+lifespan_months = 36
+# Calculate granular CLV
+clv_granular = revenue_per_purchase * frequency_per_month * lifespan_months
+# Print granular CLV value
+print('Average granular CLV is {:.1f} USD'.format(clv_granular))
