@@ -112,3 +112,12 @@ rmse_test = np.sqrt(mean_squared_error(test_Y, test_pred_Y))
 mae_test = mean_absolute_error(test_Y, test_pred_Y)
 # Print the performance metrics
 print('RMSE train: {}; RMSE test: {}\nMAE train: {}, MAE test: {}'.format(rmse_train, rmse_test, mae_train, mae_test))
+
+# Import `statsmodels.api` module
+import statsmodels.api as sm
+# Initialize model instance on the training data
+olsreg = sm.OLS(train_Y, train_X)
+# Fit the model
+olsreg = olsreg.fit()
+# Print model summary
+print(olsreg.summary())
