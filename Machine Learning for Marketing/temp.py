@@ -121,3 +121,35 @@ olsreg = sm.OLS(train_Y, train_X)
 olsreg = olsreg.fit()
 # Print model summary
 print(olsreg.summary())
+
+''' 
+output:
+                                OLS Regression Results                                
+=======================================================================================
+Dep. Variable:                      y   R-squared (uncentered):                   0.488
+Model:                            OLS   Adj. R-squared (uncentered):              0.487
+Method:                 Least Squares   F-statistic:                              480.3
+Date:                Wed, 13 Apr 2022   Prob (F-statistic):                        0.00
+Time:                        15:09:19   Log-Likelihood:                         -2769.8
+No. Observations:                2529   AIC:                                      5550.
+Df Residuals:                    2524   BIC:                                      5579.
+Df Model:                           5                                                  
+Covariance Type:            nonrobust                                                  
+==================================================================================
+                        coef    std err          t      P>|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+recency            0.0002      0.000      1.701      0.089   -2.92e-05       0.000
+frequency          0.1316      0.003     38.000      0.000       0.125       0.138
+monetary        1.001e-06   3.59e-05      0.028      0.978   -6.95e-05    7.15e-05
+quantity_avg       0.0001      0.000      0.803      0.422      -0.000       0.000
+quantity_total    -0.0001   5.74e-05     -2.562      0.010      -0.000   -3.45e-05
+==============================================================================
+Omnibus:                      987.494   Durbin-Watson:                   1.978
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             5536.657
+Skew:                           1.762   Prob(JB):                         0.00
+Kurtosis:                       9.334   Cond. No.                         249.
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+'''
