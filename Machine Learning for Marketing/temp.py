@@ -72,3 +72,21 @@ features = online_X.groupby('CustomerID').agg({
 
 # Rename the columns
 features.columns = ['CustomerID', 'recency', 'frequency', 'monetary', 'quantity_avg', 'quantity_total']
+
+# Build a pivot table counting invoices for each customer monthly
+cust_month_tx = pd.pivot_table(data=online, values='InvoiceNo',
+                               index=['CustomerID'], columns=['InvoiceMonth'],
+                               aggfunc=pd.Series.nunique, fill_value=0)
+# Store November 2011 data column name as a list
+target = ['2011-11']
+# Store target value as `Y`
+Y = cust_month_tx[target]
+
+# Store customer identifier column name as a list
+custid = ['CustomerID']
+# Select feature column names excluding customer identifier
+cols = [col for col in features.columns if col not in custid]
+# Extract the features as `X`
+X = features[cols]
+# Split data to training and testing
+train_X, test_X, train_Y, test_Y = train_test_split(X, Y, test_size=0.25, random_state=99)
