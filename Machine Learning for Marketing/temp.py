@@ -100,3 +100,15 @@ linreg.fit(train_X, train_Y)
 train_pred_Y = linreg.predict(train_X)
 # Predict the target variable for testing data
 test_pred_Y = linreg.predict(test_X)
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+# Calculate root mean squared error on training data
+rmse_train = np.sqrt(mean_squared_error(train_Y, train_pred_Y))
+# Calculate mean absolute error on training data
+mae_train = mean_absolute_error(train_Y, train_pred_Y)
+# Calculate root mean squared error on testing data
+rmse_test = np.sqrt(mean_squared_error(test_Y, test_pred_Y))
+# Calculate mean absolute error on testing data
+mae_test = mean_absolute_error(test_Y, test_pred_Y)
+# Print the performance metrics
+print('RMSE train: {}; RMSE test: {}\nMAE train: {}, MAE test: {}'.format(rmse_train, rmse_test, mae_train, mae_test))
