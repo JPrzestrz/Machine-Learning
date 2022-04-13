@@ -90,3 +90,13 @@ cols = [col for col in features.columns if col not in custid]
 X = features[cols]
 # Split data to training and testing
 train_X, test_X, train_Y, test_Y = train_test_split(X, Y, test_size=0.25, random_state=99)
+
+from sklearn.linear_model import LinearRegression
+# Initialize linear regression instance
+linreg = LinearRegression()
+# Fit the model to training dataset
+linreg.fit(train_X, train_Y)
+# Predict the target variable for training data
+train_pred_Y = linreg.predict(train_X)
+# Predict the target variable for testing data
+test_pred_Y = linreg.predict(test_X)
