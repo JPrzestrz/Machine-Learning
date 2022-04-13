@@ -127,8 +127,3 @@ exported = tree.export_graphviz(decision_tree=mytree,
 #graph = graphviz.Source(exported)
 # Display the decision tree
 #display(graph)
-'''
-----------------------------------------------------
-Chapter 3 - Customer Lifetime Value (CLV) prediction
-----------------------------------------------------
-'''
