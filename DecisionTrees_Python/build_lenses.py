@@ -40,6 +40,7 @@ str(num_of_test_errors/num_of_test_examples))
 
 pruned_tree = np.copy(tree)
 [num_of_rows, num_of_nodes] = pruned_tree.shape
+print(f"Num of rows: {num_of_rows}")
 for i in range(num_of_rows):
     pruned_tree[i][4] = 0
 pruned_tree[num_of_rows-1][4] = 3   # simple changing node 4 to the leaf of class 3 

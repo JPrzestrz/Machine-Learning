@@ -80,11 +80,8 @@ for eksp in range(number_of_experiments):
     # ...............................
     # ...............................
     # ...............................
-
-
     
-    [num_of_rows, num_of_nodes] = pruned_tree.shape
-
+    
     num_of_training_errors_prun = dt.calc_error(train_vectors,train_classes,pruned_tree)
     num_of_test_errors_prun = dt.calc_error(test_vectors,test_classes,pruned_tree)
 
