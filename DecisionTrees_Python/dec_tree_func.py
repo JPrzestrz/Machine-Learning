@@ -159,6 +159,14 @@ def calc_error(examples,classes, tree):
             #print("ex = "+str(ex)+" true class = "+str(classes[ex])+" class from tree = "+str(class_num))
     return num_of_errors
 
+def delete_node(tree,wezel):
+    liczba_wierszy, liczba_wezlow = tree.shape
+    liczba_par = liczba_wierszy - 1
+    Dp = tree
+    for i in range(liczba_par):
+        if Dp[i,wezel] > 0:
+            Dp = delete_node[Dp,Dp[i,wezel]]
+    Dp[1:liczba_wierszy,wezel] = np.zeros(liczba_wierszy,1)
 
 def distribution(examples,classes,tree):
     [num_of_examples, num_of_attributes] = examples.shape
