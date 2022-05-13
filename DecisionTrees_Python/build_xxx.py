@@ -76,10 +76,6 @@ for eksp in range(number_of_experiments):
 
     # pruning:
     # a place for your algorithm here!
-    # ...............................
-    # ...............................
-    # ...............................
-    # ...............................
     '''
     for n=1:length(depth(Dp))       
        if sum(dist_constr(:,n))<5
@@ -91,11 +87,15 @@ for eksp in range(number_of_experiments):
     '''
     #liczba_wierszy, liczba_wezlow=tree.shape
     #print(f'wiersze:{liczba_wierszy}, wezly:{liczba_wezlow}, depth:{d}')
+    # check if it gets correct class 
+    # check if node deleting func works
+    # check if it assigns correct value 
+    # to the pruned tree 
     for n in range(len(dt.depth(pruned_tree))):
         if np.sum(dist[:,n])<5:
-            clas = np.argmax(dist[:,n])
+            class_v = np.argmax(dist[:,n])
             pruned_tree = dt.delete_node(pruned_tree,n)
-            pruned_tree[-1,n] = clas
+            pruned_tree[-1,n] = class_v
     
     num_of_training_errors_prun = dt.calc_error(train_vectors,train_classes,pruned_tree)
     num_of_test_errors_prun = dt.calc_error(test_vectors,test_classes,pruned_tree)
