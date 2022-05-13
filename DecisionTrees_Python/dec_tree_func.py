@@ -165,8 +165,8 @@ def delete_node(tree,wezel):
     Dp = tree
     for i in range(liczba_par):
         if Dp[i,wezel] > 0:
-            Dp = delete_node[Dp,Dp[i,wezel]]
-    Dp[1:liczba_wierszy,wezel] = np.zeros(liczba_wierszy,1)
+            delete_node[Dp,Dp[i,wezel]]
+    Dp[0:liczba_wierszy,wezel] = np.zeros(liczba_wierszy,dtype=int)
 
 def distribution(examples,classes,tree):
     [num_of_examples, num_of_attributes] = examples.shape
