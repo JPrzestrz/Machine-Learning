@@ -93,9 +93,10 @@ for eksp in range(number_of_experiments):
     #print(f'wiersze:{liczba_wierszy}, wezly:{liczba_wezlow}, depth:{d}')
     for n in range(len(dt.depth(pruned_tree))):
         if np.sum(dist[:,n])<5:
-            temp, clas = np.argmax(dist[:,n])
-            pruned_tree = dt.delete_node(pruned_tree)
+            clas = np.argmax(dist[:,n])
+            pruned_tree = dt.delete_node(pruned_tree,n)
             pruned_tree[-1,n] = clas
+    
     num_of_training_errors_prun = dt.calc_error(train_vectors,train_classes,pruned_tree)
     num_of_test_errors_prun = dt.calc_error(test_vectors,test_classes,pruned_tree)
 
