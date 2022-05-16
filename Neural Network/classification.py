@@ -5,12 +5,12 @@ import pdb
 import matplotlib.pyplot as plt 
 import numpy as np
 import tensorflow as tf
-
+tf.compat.v1.disable_eager_execution()
 # training data:
 #points = np.array([[1,5],[3,5],[1,3],[2,3],[3,1],[5,3],[7,1],[3,3],[2,1],[5,5]], dtype=float)
 #class_labels = np.transpose(np.array([[1,1,1,1,0,0,0,0,1,1]], dtype = float))
 points = np.array([[0,6],[0,7],[2,2],[4,3],[4,4],[9,6],[9,7],[1,4],[2,5],[5,1],[6,7],[7,4],[7,6],[8,3]], dtype=float)
-class_labels = np.transpose(np.array([[0,0,0,0,0,0,0,1,1,1,1,1,1,1]], dtype = int))
+class_labels = np.transpose(np.array([[1,0,1,1,0,0,0,0,0,0,1,1,1,1]], dtype = int))
 
 num_of_examples, num_of_features = points.shape
 range_min = np.amin(points,axis=0)       # for plotting 
@@ -34,19 +34,19 @@ nneu = [10]                     # number of neurons in the 1-st level of ANN
 num_of_epochs = 1500
 num_to_show = 50
 
-sess = tf.InteractiveSession()
+sess = tf.compat.v1.InteractiveSession()
 
-x = tf.placeholder(tf.float32, shape=[None, num_of_features])  # place for input vectors
-y_ = tf.placeholder(tf.float32, shape=[None, 1])               # place for desired output of ANN
+x = tf.compat.v1.placeholder(tf.float32, shape=[None, num_of_features])  # place for input vectors
+y_ = tf.compat.v1.placeholder(tf.float32, shape=[None, 1])               # place for desired output of ANN
 
 
-IW = tf.Variable(tf.truncated_normal([num_of_features, nneu[0]], stddev=0.1))  # 1-st level weights initialized with normal distribution
+IW = tf.Variable(tf.compat.v1.truncated_normal([num_of_features, nneu[0]], stddev=0.1))  # 1-st level weights initialized with normal distribution
 b1 = tf.Variable(tf.constant(0.1, shape=[nneu[0]]))                            # 1-st level biases -||- 
 
 h1 = tf.nn.tanh(tf.matmul(x, IW) + b1)                                    # output values from 1-st level (using hyperbolic tangent activation func.)
 
 
-LW21 = tf.Variable(tf.truncated_normal([nneu[0],1], stddev=0.1))               # 2-nd level weights values
+LW21 = tf.Variable(tf.compat.v1.truncated_normal([nneu[0],1], stddev=0.1))               # 2-nd level weights values
 b2 = tf.Variable(tf.zeros([1]))                                           # 2-nd level bias values
 
 #LW32 = ...                                                     # 3-nd level weights values
@@ -55,15 +55,15 @@ b2 = tf.Variable(tf.zeros([1]))                                           # 2-nd
 y = tf.nn.sigmoid(tf.matmul(h1, LW21) + b2)                               # output from ANN (single value using sigmoidal act.funct in range (0,1))
 
 
-mean_square_error = tf.reduce_mean(tf.reduce_sum((y_ - y)*(y_ - y), reduction_indices=[1]))          # MSE loss function 
-cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y) + y*tf.log(y_+0.001), reduction_indices=[1])) # full cross-entropy loss function
+mean_square_error = tf.reduce_mean(tf.reduce_sum((y_ - y)*(y_ - y), axis=1))          # MSE loss function 
+cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.math.log(y) + y*tf.math.log(y_+0.001), axis=1)) # full cross-entropy loss function
 
-train_step = tf.train.GradientDescentOptimizer(0.5).minimize(mean_square_error)   # training method, step value, loss function 
+train_step = tf.compat.v1.train.GradientDescentOptimizer(0.5).minimize(mean_square_error)   # training method, step value, loss function 
                                                                               # You can choose loss function
 
-init = tf.global_variables_initializer() 
+init = tf.compat.v1.global_variables_initializer() 
 
-sess = tf.Session()
+sess = tf.compat.v1.Session()
 sess.run(init)
 
 # the training process:
